@@ -29,16 +29,13 @@ def test_add_emergency_contact(browser: Browser):
     page.wait_for_load_state('networkidle')
     page.wait_for_timeout(10000)
    
-    #page.locator("form .oxd-input").first.fill('Arnaldo')
+
     page.locator("form").get_by_role("textbox").first.fill("Maria")
     page.locator("form").get_by_role("textbox").nth(1).fill("Brother")
     page.locator("form").get_by_role("textbox").nth(2).fill("-")
     page.locator("form").get_by_role("textbox").nth(3).fill("1175256723")
     page.locator("form").get_by_role("textbox").nth(4).fill("43255356")
-    # page.locator("form .oxd-input").nth(1).fill('Brother')
-    # page.locator("form .oxd-input").nth(2).fill('-')
-    # page.locator("form .oxd-input").nth(3).fill('1175256723')
-    # page.locator("form .oxd-input").nth(4).fill('43255356')
+
     page.click('button[type=submit]')
     page.reload()
     page.wait_for_timeout(5000)
@@ -49,11 +46,6 @@ def test_add_emergency_contact(browser: Browser):
     expect(last_row_columns[3]).to_have_text('-')
     expect(last_row_columns[4]).to_have_text('1175256723')
     expect(last_row_columns[5]).to_have_text('43255356')
-    #assert page.locator("div.header:has-text('Name') + div.data").first.inner_text() == 'Arnaldo'
-    # assert page.locator("text=Arnaldo").is_visible()
-    # assert page.locator("text=Brother").is_visible()
-    # assert page.locator("text=-").is_visible()
-    # assert page.locator("text=1175256723").is_visible()
-    # assert page.locator("text=43255356").is_visible()
+
     page.screenshot(path="Screenshots/EmergencyContact.png", full_page=True)
     page.close()
